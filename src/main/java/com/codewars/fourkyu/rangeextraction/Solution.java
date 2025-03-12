@@ -1,6 +1,8 @@
 package com.codewars.fourkyu.rangeextraction;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
     public static String rangeExtraction(int[] arr) {
@@ -76,5 +78,27 @@ public class Solution {
             sb.append(arr[arr.length-1]);
         }
         return sb.toString();
+    }
+
+    /**
+     * Best practice
+     */
+    public static String rangeExtraction3(int[] arr) {
+        Arrays.sort(arr);
+        final int length = arr.length;
+        int idx = 0, idx2 = 1;
+        List<String> result = new ArrayList<>();
+        while (idx < length) {
+            while (idx2 < length && arr[idx2] - arr[idx2 - 1] == 1) idx2++;
+            if (idx2 - idx >= 3) {
+                result.add(arr[idx] + "-" + arr[idx2 - 1]);
+                idx = idx2;
+            } else {
+                for (; idx < idx2; idx++)
+                    result.add(String.valueOf(arr[idx]));
+            }
+            idx2++;
+        }
+        return String.join(",", result);
     }
 }
