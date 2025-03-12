@@ -1,1 +1,1 @@
-ref: https://gaji-gaji.tistory.com/entry/Codewars-12-Range-Extraction-4kyu
+ref: https://www.codewars.com/kata/51ba717bb08c1cd60f00002f
