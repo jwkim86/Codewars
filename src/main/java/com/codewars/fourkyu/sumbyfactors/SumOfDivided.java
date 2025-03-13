@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// ref. https://www.codewars.com/kata/54d496788776e49e6b00052f/solutions/java
 public class SumOfDivided {
     public static String sumOfDivided(int[] l) {
         Map<Integer, Integer> result = new HashMap<>();
