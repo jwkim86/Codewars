@@ -1,9 +1,7 @@
 package com.codewars.fivekyu.humanreadabletime;
 
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+// https://www.codewars.com/kata/52685f7382004e774f0001f7/train/java
 public class HumanReadableTime {
     public static String makeReadable(int seconds) {
         int s = seconds%60;
