@@ -1,4 +1,4 @@
-package com.codewars.fivekyu.humanreadabletime;
+package com.codewars.fivekyu.rot13;
 
 import org.junit.jupiter.api.Test;
 
