@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class BattleshipFieldValidator {
 
+    // https://www.codewars.com/kata/52bb6539a4cf1b12d90005b7/java
     public static boolean fieldValidator(int[][] field) {
         Map<Integer, Integer> ships = new HashMap<>();
         for(int i=0; i<10; i++) {
