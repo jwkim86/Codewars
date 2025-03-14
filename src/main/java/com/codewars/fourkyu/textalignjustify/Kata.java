@@ -8,41 +8,46 @@ import java.util.stream.Collectors;
 public class Kata {
     public static String justify(String text, int width) {
 
+        String[] words = text.split(" ");
         StringBuilder sb = new StringBuilder();
-        int i=0;
-        for(int j=width; j<text.length(); i=j+1, j+=width+1) {
-            j = text.lastIndexOf(' ', j);
-            String line = text.substring(i, j);
-            appendLine(line, sb, width);
-            sb.append("\n");
+        Stack<String> line = new Stack<>();
+
+        for(int i=0; i<words.length; i++) {
+            line.push(words[i]);
+            if(line.stream().mapToInt(s -> s.length() + 1).sum() - 1 > width) {
+                line.pop();
+                i--;
+                appendLine(line, sb, width);
+                line.clear();
+            }
         }
 
-        // last line;
-        sb.append(text.substring(i).trim());
+        // last line
+        sb.append(String.join(" ", line));
 
         return sb.toString();
     }
 
-    public static void appendLine(String line, StringBuilder sb, int width) {
-        if(line.length() == width) {
-            sb.append(line);
-            return;
-        }
-        String[] tokens = line.split(" ");
-        int gapCount = tokens.length -1;
+    public static void appendLine(Stack<String> line, StringBuilder sb, int width) {
+
+        int gapCount = line.size() -1;
         if(gapCount < 1) {
-            sb.append(tokens[0]);
+            sb.append(line.pop());
         } else {
-            int totalWhiteSpaceSize = width - line.length() + tokens.length - 1;
+            int totalWhiteSpaceSize = width - line.stream().mapToInt(String::length).sum();
             int whiteSpaceSize = totalWhiteSpaceSize / gapCount;
-            int remainWhiteSpaceSize = totalWhiteSpaceSize % gapCount;
-            for (int i = 0; i < remainWhiteSpaceSize; i++) {
-                sb.append(String.format("%-" + (tokens[i].length() + whiteSpaceSize + 1) + "s", tokens[i]));
+            int largeWhiteSpaceCount = totalWhiteSpaceSize % gapCount;
+
+            for (int i = 0; i < largeWhiteSpaceCount; i++) {
+                sb.append(line.get(i));
+                sb.append(" ".repeat(whiteSpaceSize + 1));
             }
-            for (int i = remainWhiteSpaceSize; i < tokens.length - 1; i++) {
-                sb.append(String.format("%-" + (tokens[i].length() + whiteSpaceSize) + "s", tokens[i]));
+            for (int i = largeWhiteSpaceCount; i < line.size() - 1; i++) {
+                sb.append(line.get(i));
+                sb.append(" ".repeat(whiteSpaceSize));
             }
-            sb.append(tokens[tokens.length-1]);
+            sb.append(line.get(line.size()-1));
+            sb.append("\n");
         }
     }
 

@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class KataTest {
     @Test
     void sampleTests() {
-        assertEquals("123  45\n6", Kata.justify2("123 45 6", 7));
-        assertEquals("123", Kata.justify2("123", 7));
-        assertEquals("", Kata.justify2("", 10));
+        assertEquals("123  45\n6", Kata.justify("123 45 6", 7));
+        assertEquals("123", Kata.justify("123", 7));
+        assertEquals("", Kata.justify("", 10));
     }
     private static final String LIPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sa"
             + "gittis dolor mauris, at elementum ligula tempor eget. In quis rhoncus nunc, at aliquet orci. Fusc"
@@ -34,12 +34,12 @@ class KataTest {
                 + "dapibus. Pellentesque commodo,\nnisi    sit   amet   hendrerit\nfringilla,   ante  odio  porta\n"
                 + "lacus,   ut   elementum  justo\nnulla et dolor.";
 
-        assertEquals(expected, Kata.justify2(LIPSUM, 30));
+        assertEquals(expected, Kata.justify(LIPSUM, 30));
     }
 
     @Test
     void test() {
-        assertEquals("123  45\n6", Kata.justify2("123 45 6", 7));
+        assertEquals("123  45\n6", Kata.justify("123 45 6", 7));
     }
 
     @Test
@@ -61,7 +61,7 @@ class KataTest {
                 tempus  dapibus.  Pellentesque  commodo,  nisi sit amet
                 hendrerit   fringilla,   ante   odio  porta  lacus,  ut
                 elementum justo nulla et dolor.""";
-        assertEquals(expected, Kata.justify2(input, 55));
+        assertEquals(expected, Kata.justify(input, 55));
     }
 
     @Test
@@ -71,7 +71,7 @@ class KataTest {
                 Lorem  ipsum  dolor  sit  amet,  consectetur adipiscing
                 Lorem  ipsum  dolor  sit  amet,  consectetur adipiscing
                 Lorem ipsum dolor sit amet, consectetur adipiscing""";
-        assertEquals(expected, Kata.justify2(input, 55));
+        assertEquals(expected, Kata.justify(input, 55));
     }
 
     @Test
@@ -80,16 +80,6 @@ class KataTest {
         String expected = """
                 lacus,  ut  elementum
                 justo nulla et dolor.""";
-        assertEquals(expected, Kata.justify2(input, 21));
-    }
-
-    @Test
-    void test5() {
-        int width = 3;
-        assertEquals(3, "012  56789".lastIndexOf(" ", 3));
-        assertEquals(4, "012  56789".lastIndexOf(" ", 4));
-        assertEquals(4, "012  56789".lastIndexOf(" ", 5));
-        assertEquals("012", "012 456789".substring(0,3));
-        assertEquals("456", "012 456789".substring(3+1,3+1+width));
+        assertEquals(expected, Kata.justify(input, 21));
     }
 }
