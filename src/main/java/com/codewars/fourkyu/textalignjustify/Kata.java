@@ -4,21 +4,6 @@ import java.util.StringTokenizer;
 
 public class Kata {
     public static String justify(String text, int width) {
-        StringTokenizer st = new StringTokenizer(text);
-        StringBuilder sb = new StringBuilder();
-
-        int sumLength = 0;
-        while(sumLength <= width) {
-            while(st.hasMoreTokens()) {
-                String token = st.nextToken();
-                sumLength += token.length() + 1;
-            }
-        }
-
-        return text;
-    }
-
-    public static String justify2(String text, int width) {
 
         StringBuilder sb = new StringBuilder();
         int i=0;
