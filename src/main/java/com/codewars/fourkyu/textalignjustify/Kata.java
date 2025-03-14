@@ -7,11 +7,9 @@ import java.util.stream.Collectors;
 // ref. https://www.codewars.com/kata/537e18b6147aa838f600001b/train/java
 public class Kata {
     public static String justify(String text, int width) {
-
         String[] words = text.split(" ");
         StringBuilder sb = new StringBuilder();
         Stack<String> line = new Stack<>();
-
         for(int i=0; i<words.length; i++) {
             line.push(words[i]);
             if(line.stream().mapToInt(s -> s.length() + 1).sum() - 1 > width) {
@@ -21,34 +19,29 @@ public class Kata {
                 line.clear();
             }
         }
-
-        // last line
+        // append last line
         sb.append(String.join(" ", line));
-
         return sb.toString();
     }
 
     public static void appendLine(Stack<String> line, StringBuilder sb, int width) {
-
         int gapCount = line.size() -1;
         if(gapCount < 1) {
-            sb.append(line.pop());
+            sb.append(line.get(0));
         } else {
-            int totalWhiteSpaceSize = width - line.stream().mapToInt(String::length).sum();
-            int whiteSpaceSize = totalWhiteSpaceSize / gapCount;
-            int largeWhiteSpaceCount = totalWhiteSpaceSize % gapCount;
-
-            for (int i = 0; i < largeWhiteSpaceCount; i++) {
+            int spaces = width - line.stream().mapToInt(String::length).sum();
+            int spacePerWord = spaces / gapCount;
+            int largeSpaceCount = spaces % gapCount;
+            for (int i = 0; i < largeSpaceCount; i++) {
                 sb.append(line.get(i));
-                sb.append(" ".repeat(whiteSpaceSize + 1));
-            }
-            for (int i = largeWhiteSpaceCount; i < line.size() - 1; i++) {
+                sb.append(" ".repeat(spacePerWord + 1));            }
+            for (int i = largeSpaceCount; i < line.size() - 1; i++) {
                 sb.append(line.get(i));
-                sb.append(" ".repeat(whiteSpaceSize));
+                sb.append(" ".repeat(spacePerWord));
             }
             sb.append(line.get(line.size()-1));
-            sb.append("\n");
         }
+        sb.append("\n");
     }
 
     // Best practice!!
