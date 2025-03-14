@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+// ref. https://www.codewars.com/kata/537e18b6147aa838f600001b/train/java
 public class Kata {
     public static String justify(String text, int width) {
 
