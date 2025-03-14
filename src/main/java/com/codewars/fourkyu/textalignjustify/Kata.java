@@ -1,6 +1,8 @@
 package com.codewars.fourkyu.textalignjustify;
 
-import java.util.StringTokenizer;
+import java.util.List;
+import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class Kata {
     public static String justify(String text, int width) {
@@ -41,5 +43,36 @@ public class Kata {
             }
             sb.append(tokens[tokens.length-1]);
         }
+    }
+
+    // Best practice!!
+    private static String formatLine(Stack<String> line, int width) {
+        if (line.size() == 1) return line.pop() + "\n";
+        int spaces = width - line.stream().mapToInt(s -> s.length()).sum();
+        int spacesPerWord = spaces / (line.size() - 1);
+        int largerSpaces = spaces % (line.size() - 1);
+        List<String> base = line.stream().map(s -> s + " ".repeat(spacesPerWord)).collect(Collectors.toList());
+        for (int i = 0; i < largerSpaces; i++)
+            base.set(i, base.get(i) + " ");
+        base.set(base.size() - 1, base.get(base.size() - 1).trim());
+        return base.stream().collect(Collectors.joining()) + "\n";
+    }
+
+    public static String justify2(String text, int width) {
+        String lines = "";
+        String[] words = text.split(" ");
+        Stack<String> line = new Stack<>();
+        for (int i = 0; i < words.length; i++) {
+            line.push(words[i]);
+            if (line.stream().mapToInt(s -> s.length() + 1).sum() - 1 > width) {
+                line.pop();
+                lines += formatLine(line, width);
+                line = new Stack<>();
+                i--;
+            }
+        }
+        lines += line.stream().collect(Collectors.joining(" "));
+
+        return lines;
     }
 }
