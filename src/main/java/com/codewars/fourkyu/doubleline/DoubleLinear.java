@@ -2,6 +2,7 @@ package com.codewars.fourkyu.doubleline;
 
 import java.util.*;
 
+// ref. https://www.codewars.com/kata/5672682212c8ecf83e000050/java
 public class DoubleLinear {
 
     public static int dblLinear (int n) {
