@@ -59,5 +59,54 @@ public class BinaryTree {
         }
         return result.stream().map(BinaryNode::value).collect(Collectors.toList());
     }
+
+    public static Stack<Integer> traversePreorderByLoop(BinaryNode root) {
+        Stack<Integer> result = new Stack<>();
+        Stack<BinaryNode> stack = new Stack<>();
+        BinaryNode current = root;
+        while(current != null || !stack.isEmpty()) {
+            if(current == null) {
+                BinaryNode n = stack.pop();
+                current = n.right();
+            } else {
+                stack.push(current);
+                result.push(current.value());
+                current = current.left();
+            }
+        }
+        return result;
+    }
+
+    public static Stack<Integer> traverseInorderByLoop(BinaryNode root) {
+        Stack<Integer> result = new Stack<>();
+        Stack<BinaryNode> stack = new Stack<>();
+        BinaryNode current = root;
+        while(current != null || !stack.isEmpty()) {
+            if(current == null) {
+                BinaryNode n = stack.pop();
+                result.push(n.value());
+                current = n.right();
+            } else {
+                stack.push(current);
+                current = current.left();
+            }
+        }
+        return result;
+    }
+
+    // ref. https://www.geeksforgeeks.org/iterative-postorder-traversal/
+    public static Stack<Integer> traversePostorderByLoop(BinaryNode root) {
+        Stack<Integer> result = new Stack<>();
+        Stack<BinaryNode> stack1 = new Stack<>();
+        stack1.push(root);
+        while(!stack1.isEmpty()) {
+            BinaryNode n = stack1.pop();
+            result.push(n.value());
+            if(n.left()!=null) stack1.push(n.left());
+            if(n.right()!=null) stack1.push(n.right());
+        }
+        Collections.reverse(result);
+        return result;
+    }
 }
 

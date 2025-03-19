@@ -30,6 +30,9 @@ class BinaryTreeTest {
         assertEquals("[3, 1, 4, 0, 5, 2, 6]", BinaryTree.traverseInorderRecursively(node0).toString());
         assertEquals("[3, 4, 1, 5, 6, 2, 0]", BinaryTree.traversePostorderRecursively(node0).toString());
         assertEquals("[0, 1, 2, 3, 4, 5, 6]", BinaryTree.traverseBfs(node0).toString());
+        assertEquals("[0, 1, 3, 4, 2, 5, 6]", BinaryTree.traversePreorderByLoop(node0).toString());
+        assertEquals("[3, 1, 4, 0, 5, 2, 6]", BinaryTree.traverseInorderByLoop(node0).toString());
+        assertEquals("[3, 4, 1, 5, 6, 2, 0]", BinaryTree.traversePostorderByLoop(node0).toString());
     }
 
     @Test
