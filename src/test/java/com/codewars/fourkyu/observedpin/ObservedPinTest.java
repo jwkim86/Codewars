@@ -61,7 +61,7 @@ class ObservedPinTest {
     @Disabled
     @RepeatedTest(value = 20)
     public void test2() {
-        ObservedPin.getPINs("55558888");
+        ObservedPin.getPINs2("55558888");
         for (String entered : expectations.keySet()) {
             test(Arrays.asList(expectations.get(entered)), ObservedPin.getPINs2(entered));
         }

@@ -1,5 +1,7 @@
 package com.codewars.fourkyu.observedpin;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,23 +23,20 @@ public class ObservedPin {
     public static List<String> getPINs(String observed) {
         char[] observedChars = observed.toCharArray();
         List<String> results = new ArrayList<>();
-        Stack<Character> currentStack = new Stack<>();
-        getPINsSub(observedChars, 0, currentStack, results);
+        char[] current = new char[observed.length()];
+        getPINsSub(observedChars, 0, current, results);
         return new ArrayList<>(results);
     } // getPINs
 
-    private static void getPINsSub(char[] observedChars, int index, Stack<Character> currentStack, List<String> results) {
+    private static void getPINsSub(char[] observedChars, int index, char[] current, List<String> results) {
         if(index==observedChars.length) {
-            results.add(currentStack.stream()
-                    .map(String::valueOf)
-                    .collect(Collectors.joining()));
+            results.add(String.valueOf(current));
             return;
         }
         Character[] nearBys = numbersNearBy.get(observedChars[index]);
         for(int i=0; i<nearBys.length; i++) {
-            currentStack.push(nearBys[i]);
-            getPINsSub(observedChars, index+1, currentStack, results);
-            currentStack.pop();
+            current[index] = nearBys[i];
+            getPINsSub(observedChars, index+1, current, results);
         }
     }
 
