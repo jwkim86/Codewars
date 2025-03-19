@@ -66,4 +66,29 @@ class BinaryTreeTest {
         assertEquals("[3, 1, 4, 0, 7, 5, 2, 6, 8]", BinaryTree.traverseInorderByLoop(node0).toString());
         assertEquals("[3, 4, 1, 7, 5, 8, 6, 2, 0]", BinaryTree.traversePostorderByLoop(node0).toString());
     }
+
+    /**
+     * binary tree layout
+     *
+     * 0
+     * |  \
+     * 1   2
+     * | \ | \
+     * 3 4 5 6
+     *
+     */
+    @Test
+    void test3() {
+        BinaryNode node6 = new BinaryNode(6, null, null);
+        BinaryNode node5 = new BinaryNode(5, null, null);
+        BinaryNode node4 = new BinaryNode(4, null, null);
+        BinaryNode node3 = new BinaryNode(3, null, null);
+        BinaryNode node2 = new BinaryNode(2, node5, node6);
+        BinaryNode node1 = new BinaryNode(1, node3, node4);
+        BinaryNode node0 = new BinaryNode(0, node1, node2);
+
+        assertArrayEquals(new String[]{
+                "013", "014", "025", "026"
+        }, BinaryTree.getAllCombinations(node0));
+    }
 }

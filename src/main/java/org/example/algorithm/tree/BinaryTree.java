@@ -108,5 +108,25 @@ public class BinaryTree {
         Collections.reverse(result);
         return result;
     }
+
+    public static String[] getAllCombinations(BinaryNode root) {
+        Stack<Integer> current = new Stack<>();
+        List<String> results = new ArrayList<>();
+        getAllCombinationsSub(root, current, results);
+        return results.toArray(new String[]{});
+    }
+
+    private static void getAllCombinationsSub(BinaryNode node, Stack<Integer> current, List<String> results) {
+        if (node == null) return;
+        current.push(node.value());
+        getAllCombinationsSub(node.left(), current, results);
+        getAllCombinationsSub(node.right(), current, results);
+        if (node.left() == null && node.right() == null) {
+            results.add(current.stream()
+                    .map(String::valueOf)
+                    .collect(Collectors.joining()));
+        }
+        current.pop();
+    }
 }
 
