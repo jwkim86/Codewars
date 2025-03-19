@@ -1,14 +1,21 @@
 package org.example.algorithm.tree;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
 
+    /**
+     * binary tree layout
+     *
+     * 0
+     * |  \
+     * 1   2
+     * | \ | \
+     * 3 4 5 6
+     *
+     */
     @Test
     void test1() {
         BinaryNode node6 = new BinaryNode(6, null, null);
@@ -19,7 +26,9 @@ class BinaryTreeTest {
         BinaryNode node1 = new BinaryNode(1, node3, node4);
         BinaryNode node0 = new BinaryNode(0, node1, node2);
 
-        assertEquals("[3, 1, 4, 0, 5, 2, 6]", BinaryTree.traverseDfsRecursively(node0, null).toString());
+        assertEquals("[0, 1, 3, 4, 2, 5, 6]", BinaryTree.traversePreorderRecursively(node0).toString());
+        assertEquals("[3, 1, 4, 0, 5, 2, 6]", BinaryTree.traverseInorderRecursively(node0).toString());
+        assertEquals("[3, 4, 1, 5, 6, 2, 0]", BinaryTree.traversePostorderRecursively(node0).toString());
         assertEquals("[0, 1, 2, 3, 4, 5, 6]", BinaryTree.traverseBfs(node0).toString());
     }
 
@@ -34,7 +43,7 @@ class BinaryTreeTest {
         BinaryNode node1 = new BinaryNode(1, node3, node4);
         BinaryNode node0 = new BinaryNode(0, node1, node2);
 
-        assertEquals("[3, 1, 4, 0, 5, 2, 6, 7]", BinaryTree.traverseDfsRecursively(node0, null).toString());
+        assertEquals("[3, 1, 4, 0, 5, 2, 6, 7]", BinaryTree.traverseInorderRecursively(node0).toString());
         assertEquals("[0, 1, 2, 3, 4, 5, 6, 7]", BinaryTree.traverseBfs(node0).toString());
     }
 }
