@@ -21,8 +21,8 @@ public class BinaryTree {
 
     // DFS 2
     public static Stack<Integer> traverseInorderRecursively(BinaryNode node) {
-        Stack<Integer> result = result = new Stack<>();
-        traverseInorderRecursivelySub(node.left(), result);
+        Stack<Integer> result = new Stack<>();
+        traverseInorderRecursivelySub(node, result);
         return result;
     }
 
@@ -36,7 +36,7 @@ public class BinaryTree {
     // DFS 3
     public static Stack<Integer> traversePostorderRecursively(BinaryNode node) {
         Stack<Integer> result = new Stack<>();
-        traversePostorderRecursivelySub(node.left(), result);
+        traversePostorderRecursivelySub(node, result);
         return result;
     }
 
@@ -49,9 +49,9 @@ public class BinaryTree {
 
     // BFS can't implement by recursion
     public static List<Integer> traverseBfs(BinaryNode root) {
-        BinaryNode node = root;
         ArrayList<BinaryNode> result = new ArrayList<>();
         result.add(root);
+        BinaryNode node;
         for(int i=0; i<result.size(); i++) {
             node = result.get(i);
             if(node.left() != null) result.add(node.left());
